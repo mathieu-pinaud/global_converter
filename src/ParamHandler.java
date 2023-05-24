@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class ParamHandler {
     public String base;
     public String text;
+    public int[] possible_bases;
 
     public ParamHandler (String[] raw_param, Scanner keyb){
         if (raw_param.length == 2){
@@ -17,7 +18,28 @@ public class ParamHandler {
             this.base = get_base(keyb);
             this.text = get_text(keyb);
         }
+        check_textbase(this.text);
     }
+
+    public void check_textbase(String text) {
+        int[] base_list = {1, 1, 1, 1, 1};
+        String base = "0123456789ABCDEF";
+        for (int i = 0; i < text.length(); i += 1) {
+            if (text.charAt(i) != ' ') {
+                int verif = base.indexOf(text.charAt(i));
+                if (verif > 1 || verif == -1)
+                    base_list[0] = 0;
+                if (verif > 7 || verif == -1)
+                    base_list[1] = 0;
+                if (verif > 9 || verif == -1)
+                    base_list[2] = 0;
+                if (verif == -1)
+                    base_list[3] = 0;
+            }
+        }
+        this.possible_bases = base_list;
+    }
+
 
     public static int check_base(String test_base){
 
