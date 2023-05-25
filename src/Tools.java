@@ -21,8 +21,9 @@ public class Tools {
             String tmp = "";
             while (i > 0) {
                 tmp += base.charAt(i % base_length);
-                i = (i - i % base_length) / base_length;
+                i = (i - (i % base_length)) / base_length;
             }
+
             res[j] = reverse_string(tmp);
             j += 1;
         }
@@ -48,5 +49,9 @@ public class Tools {
             }
         }
         return res;
+    }
+
+    public static boolean is_int_valid(int i){
+        return (i > '0' && i < '9') || (i > 'A' && i < 'Z') || (i > 'a' && i < 'z') || i == ' ';
     }
 }
